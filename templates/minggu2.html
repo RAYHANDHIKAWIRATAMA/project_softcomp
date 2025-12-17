@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page">
+    <div class="content">
+        <h1>Minggu 2 : Fuzzy Sugeno</h1>
+        <h2>Minggu 2: Studi Kasus Fuzzy Metode Sugeno</h2>
+
+        <p>
+            Pada minggu ini, kita akan mempelajari salah satu metode penting dalam logika fuzzy, yaitu
+            <b>Metode Fuzzy Sugeno</b>. Metode ini dikembangkan oleh <b>Takagi–Sugeno–Kang (TSK)</b> dan digunakan untuk
+            sistem yang memerlukan keluaran berbentuk nilai numerik (bukan himpunan fuzzy seperti pada Mamdani).
+        </p>
+
+        <h3>🔹 Pengertian Fuzzy Sugeno</h3>
+        <p>
+            Fuzzy Sugeno merupakan model inferensi fuzzy yang setiap aturan (rule) menghasilkan output berupa fungsi
+            linear dari variabel input. Dengan kata lain, setiap rule memiliki bentuk:
+        </p>
+
+        <div class="rumus">
+            IF x₁ is A₁ AND x₂ is A₂ THEN z = p·x₁ + q·x₂ + r
+        </div>
+
+        <p>
+            Di mana:
+            <br>• <b>x₁, x₂</b> = variabel input
+            <br>• <b>A₁, A₂</b> = himpunan fuzzy untuk masing-masing input
+            <br>• <b>p, q, r</b> = parameter konstan hasil perancangan atau pelatihan
+        </p>
+
+        <h3>🔹 Langkah-Langkah Metode Sugeno</h3>
+        <ol>
+            <li>Menentukan himpunan fuzzy untuk masing-masing variabel input (fungsi keanggotaan).</li>
+            <li>Menentukan rule fuzzy berbentuk IF-THEN.</li>
+            <li>Melakukan proses inferensi fuzzy untuk mendapatkan derajat keanggotaan tiap rule.</li>
+            <li>Menghitung output z<sub>i</sub> untuk tiap rule menggunakan fungsi liniernya.</li>
+            <li>Menggabungkan seluruh rule dengan metode rata-rata berbobot:</li>
+        </ol>
+
+        <div class="rumus">
+            z = (Σ (wᵢ · zᵢ)) / (Σ wᵢ)
+        </div>
+
+        <p>
+            Di mana:
+            <br>• <b>wᵢ</b> = derajat kebenaran (firing strength) dari rule ke-i
+            <br>• <b>zᵢ</b> = nilai keluaran hasil fungsi linier dari rule ke-i
+        </p>
+
+        <h3>🔹 Studi Kasus</h3>
+        <p>
+            Misalkan kita ingin menentukan <b>bonus karyawan</b> berdasarkan dua faktor: <b>kinerja (x₁)</b> dan
+            <b>kehadiran (x₂)</b>.
+        </p>
+
+        <ul>
+            <li>Variabel kinerja dan kehadiran memiliki domain [0, 10].</li>
+            <li>Terdapat dua himpunan fuzzy: Rendah (R) dan Tinggi (T).</li>
+        </ul>
+
+        <p>Aturan fuzzy yang digunakan:</p>
+
+        <div class="rumus">
+            R1: IF Kinerja = Rendah AND Kehadiran = Rendah THEN z₁ = 5 + 0.5·x₁ + 0.4·x₂<br>
+            R2: IF Kinerja = Tinggi AND Kehadiran = Tinggi THEN z₂ = 10 + 0.7·x₁ + 0.6·x₂
+        </div>
+
+        <p>
+            Misalkan nilai input adalah:
+            <br>• Kinerja (x₁) = 6  
+            <br>• Kehadiran (x₂) = 8
+        </p>
+
+        <h3>🔹 Langkah Perhitungan</h3>
+        <ol>
+            <li>
+                Tentukan derajat keanggotaan untuk masing-masing himpunan fuzzy:
+                <div class="rumus">
+                    μ<sub>Rendah</sub>(x₁=6) = 0.4 &nbsp;&nbsp;&nbsp; μ<sub>Tinggi</sub>(x₁=6) = 0.6 <br>
+                    μ<sub>Rendah</sub>(x₂=8) = 0.2 &nbsp;&nbsp;&nbsp; μ<sub>Tinggi</sub>(x₂=8) = 0.8
+                </div>
+            </li>
+            <li>
+                Hitung derajat kebenaran (firing strength) untuk tiap rule:
+                <div class="rumus">
+                    w₁ = min(0.4, 0.2) = 0.2 <br>
+                    w₂ = min(0.6, 0.8) = 0.6
+                </div>
+            </li>
+            <li>
+                Hitung nilai z<sub>i</sub> dari setiap rule:
+                <div class="rumus">
+                    z₁ = 5 + 0.5(6) + 0.4(8) = 5 + 3 + 3.2 = 11.2 <br>
+                    z₂ = 10 + 0.7(6) + 0.6(8) = 10 + 4.2 + 4.8 = 19.0
+                </div>
+            </li>
+            <li>
+                Hitung hasil akhir (defuzzifikasi metode rata-rata berbobot):
+                <div class="rumus">
+                    z = (w₁·z₁ + w₂·z₂) / (w₁ + w₂)  
+                    = (0.2×11.2 + 0.6×19.0) / (0.2 + 0.6)  
+                    = (2.24 + 11.4) / 0.8  
+                    = 13.64 / 0.8 = <b>17.05</b>
+                </div>
+            </li>
+        </ol>
+
+        <p><b>Kesimpulan:</b> Berdasarkan metode Sugeno, karyawan dengan kinerja 6 dan kehadiran 8 akan memperoleh bonus sekitar <b>17.05 (dalam skala yang ditentukan)</b>.</p>
+    </div>
+</div>
+{% endblock %}

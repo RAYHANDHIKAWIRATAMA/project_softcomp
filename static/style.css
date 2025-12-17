@@ -1,0 +1,228 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a12b3, #4483ac);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+/* === NAVBAR === */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    padding: 15px 40px;
+    z-index: 1000;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.nav-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #ffdd57;
+    transform: scale(1.05);
+}
+
+/* === CONTAINER UTAMA === */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.container p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* === KONTEN (RATA KIRI-KANAN) === */
+.content {
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #ffffff;
+    margin: 120px auto 80px auto;
+    max-width: 900px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* === HEADING === */
+h2, h3 {
+    border-left: 4px solid #ffffff;
+    padding-left: 10px;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+}
+
+/* === RUMUS DAN KOTAK TAMBAHAN === */
+.rumus {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 5px solid #ffdd57;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    border-radius: 6px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.custom-space {
+    min-height: 100px;
+    border: 2px dashed rgba(255, 255, 255, 0.6);
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.page {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+button {
+    background-color: #2980b9;
+    color: white;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #1c6692;
+    transform: scale(1.05);
+}
+
+.image-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.image-display img {
+    max-width: 100%;
+    width: 400px;
+    height: auto;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+}
+
+.tsp-table,
+.data-item-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #384bff, #4d79ff);
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tsp-table th, .tsp-table td,
+.data-item-table th, .data-item-table td {
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 10px;
+    text-align: center;
+}
+
+.tsp-table thead th,
+.data-item-table thead th {
+    background: rgba(255,255,255,0.15);
+    font-weight: bold;
+}
+
+.tsp-table tbody tr:hover,
+.data-item-table tbody tr:hover {
+    background: rgba(255,255,255,0.12);
+    transition: 0.3s ease;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 18px 22px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    line-height: 1.7;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+}
+
+.info-box h3 {
+    margin-top: 0;
+    color: #ffdd57;
+}
+
+.info-box h4 {
+    color: #ffffff;
+    margin-bottom: 6px;
+    margin-top: 15px;
+    border-left: 4px solid #ffdd57;
+    padding-left: 10px;
+}
+

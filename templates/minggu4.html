@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content page">
+<h1>Minggu 4 : Algoritma Genetika untuk - TSP</h1>
+
+    <h2>📘 Penjelasan Materi Minggu 4 – Algoritma Genetika untuk TSP</h2>
+    <p>
+        Pada minggu ke-4 ini, kita mempelajari bagaimana <b>Algoritma Genetika (Genetic Algorithm, GA)</b>
+        digunakan untuk menyelesaikan <b>Travelling Salesman Problem (TSP)</b>.
+    </p>
+
+    <h3>Apa itu TSP?</h3>
+    <p>
+        TSP adalah permasalahan pencarian rute terpendek untuk mengunjungi semua kota
+        <b>sekali saja</b> dan kembali ke kota awal. 
+        Yang dicari adalah <i>urutan kunjungan terbaik</i> yang memiliki total jarak paling kecil.
+    </p>
+
+    <h3>Mengapa memakai Algoritma Genetika?</h3>
+    <p>
+        Karena jumlah kemungkinan rute bertambah sangat cepat (n!), TSP sulit diselesaikan dengan pencarian biasa.
+        GA membantu menemukan solusi mendekati optimal melalui mekanisme:
+        <b>seleksi, crossover,</b> dan <b>mutasi</b>.
+    </p>
+
+    <h3>Cara Mengisi Tabel Jarak</h3>
+    <ul>
+        <li>Setiap baris dan kolom adalah nama kota.</li>
+        <li>Isi sel dengan <b>jarak antara dua kota</b> (misalnya 10 berarti jaraknya 10 km/menit/satuan).</li>
+        <li>Bagian diagonal (A→A, B→B, dst) selalu bernilai <b>0</b>.</li>
+        <li>Jika jarak A→B = 10, biasanya B→A juga = 10 (simetris), tapi sistem membebaskan jika user ingin berbeda.</li>
+        <li>Tombol <b>+ Tambah Kota</b> akan menambah kolom & baris baru secara otomatis.</li>
+    </ul>
+
+    <h3>Parameter GA yang digunakan</h3>
+    <ul>
+        <li><b>pop (Population Size):</b> jumlah individu per generasi (default: 200).</li>
+        <li><b>gen (Generations):</b> jumlah iterasi evolusi (default: 150).</li>
+        <li><b>pc (Crossover Probability):</b> kemungkinan dua solusi saling bertukar bagian (default: 0.8).</li>
+        <li><b>pm (Mutation Probability):</b> kemungkinan solusi mengalami swap acak (default: 0.2).</li>
+    </ul>
+
+    <h3>Hasil yang akan ditampilkan</h3>
+    <ul>
+        <li><b>Rute terbaik</b> menurut GA</li>
+        <li><b>Total jarak rute tersebut</b></li>
+    </ul>
+
+    <p>
+        Setelah tabel selesai diisi, klik <b>“Jalankan GA TSP”</b> untuk memulai proses perhitungan.
+    </p>
+
+<button class="add-row-btn" onclick="addCity()">+ Tambah Kota</button>
+
+<table id="matrixTable" class="tsp-table">
+    <thead id="matrixHead">
+        <tr>
+            <th>Kota</th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+        </tr>
+    </thead>
+
+    <tbody id="matrixBody">
+        <tr>
+            <th>A</th>
+            <td><input type="number" value="0"></td>
+            <td><input type="number" value="10"></td>
+            <td><input type="number" value="20"></td>
+        </tr>
+        <tr>
+            <th>B</th>
+            <td><input type="number" value="10"></td>
+            <td><input type="number" value="0"></td>
+            <td><input type="number" value="15"></td>
+        </tr>
+        <tr>
+            <th>C</th>
+            <td><input type="number" value="20"></td>
+            <td><input type="number" value="15"></td>
+            <td><input type="number" value="0"></td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="add-row-btn" onclick="runTsp()">Jalankan GA TSP</button>
+
+<div id="result" class="card" style="display:none">
+    <h3>Hasil TSP GA</h3>
+    <p><b>Rute terbaik:</b> <span id="route"></span></p>
+    <p><b>Total jarak:</b> <span id="distance"></span></p>
+</div>
+</div>
+
+<script>
+let cityCount = 3;
+let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+function addCity(){
+    cityCount++;
+    let cityName = alphabet[cityCount - 1];
+
+    // --- Tambah header kolom ---
+    let headRow = document.getElementById("matrixHead").rows[0];
+    let newTh = document.createElement("th");
+    newTh.textContent = cityName;
+    headRow.appendChild(newTh);
+
+    // --- Tambah baris baru ---
+    let body = document.getElementById("matrixBody");
+    let newRow = document.createElement("tr");
+
+    let th = document.createElement("th");
+    th.textContent = cityName;
+    newRow.appendChild(th);
+
+    // Isi kolom jarak
+    for(let i=0; i<cityCount; i++){
+        let td = document.createElement("td");
+        td.innerHTML = `<input type="number" value="0">`;
+        newRow.appendChild(td);
+    }
+
+    body.appendChild(newRow);
+
+    // --- Tambah kolom untuk baris sebelumnya ---
+    let rows = body.rows;
+    for(let r=0; r<rows.length - 1; r++){
+        let td = document.createElement("td");
+        td.innerHTML = `<input type="number" value="0">`;
+        rows[r].appendChild(td);
+    }
+}
+</script>
+
+<script>
+function readTable(){
+    let table = document.getElementById("matrixTable");
+    let rows = table.rows;
+
+    // Ambil nama kota dari header
+    let cities = [];
+    for(let i = 1; i < rows[0].cells.length; i++){
+        cities.push(rows[0].cells[i].textContent.trim());
+    }
+
+    // Ambil jarak dalam bentuk matriks
+    let matrix = [];
+    for(let r = 1; r < rows.length; r++){
+        let rowData = [];
+        for(let c = 1; c < rows[r].cells.length; c++){
+            let value = rows[r].cells[c].querySelector("input").value;
+            rowData.push(parseFloat(value));
+        }
+        matrix.push(rowData);
+    }
+
+    return { cities, matrix };
+}
+
+async function runTsp(){
+    let data = readTable();
+
+    let payload = {
+        cities: data.cities,
+        matrix: data.matrix,
+        pop: 200,
+        gen: 150,
+        pc: 0.8,
+        pm: 0.2
+    };
+
+    let res = await fetch("/run_tsp", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+    });
+
+    let json = await res.json();
+
+    if(json.success){
+        document.getElementById("result").style.display = "block";
+        document.getElementById("route").textContent = json.result.best_route.join(" → ");
+        document.getElementById("distance").textContent = json.result.distance.toFixed(4);
+    } else {
+        alert("Gagal menghitung: " + json.message);
+    }
+}
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title if title else "Pengolahan Citra" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-title">{{ title if title else "Pengolahan Citra" }}</div>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Beranda</a></li>
+            <li><a href="{{ url_for('minggu1') }}">Minggu 1 : Soft Computing</a></li>
+            <li><a href="{{ url_for('minggu2') }}">Minggu 2 : Fuzzy Sugeno</a></li>
+            <li><a href="{{ url_for('minggu3') }}">Minggu 3 : Algoritma Genetika Knapsack</a></li>
+            <li><a href="{{ url_for('minggu4') }}">Minggu 4 : Algoritma Genetika TSP</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        Author: Rayhandhika Wiratama | 2311016210001
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const page = document.querySelector(".page");
+            if (page) {
+                setTimeout(() => page.classList.add("show"), 100);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

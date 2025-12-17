@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section style="max-width: 800px; text-align: left;">
+    <div class="page">
+        <div class="content">
+            <h1>Minggu 1 : Soft Computing</h1>
+            <h2>1. Pengertian Soft Computing</h2>
+            <p>
+                <b>Soft Computing</b> adalah pendekatan komputasi yang meniru kemampuan manusia dalam
+                mengambil keputusan berdasarkan ketidakpastian, ketidaktepatan, dan ketidaksempurnaan data.
+                Berbeda dengan <i>Hard Computing</i> yang menuntut hasil pasti dan logika biner (0 atau 1),
+                Soft Computing berfokus pada pencarian solusi yang mendekati optimal melalui pendekatan heuristik dan
+                adaptif.
+            </p>
+            <p>
+                Soft Computing sering digunakan dalam bidang kecerdasan buatan (AI) untuk menangani masalah yang
+                kompleks,
+                tidak terstruktur, atau sulit dimodelkan secara matematis.
+                Pendekatan ini mampu memberikan hasil yang memadai meskipun tidak sepenuhnya akurat secara matematis.
+            </p>
+            <ul>
+                <li>Menangani data yang samar atau tidak pasti.</li>
+                <li>Menggunakan pembelajaran adaptif untuk meningkatkan kinerja.</li>
+                <li>Menggabungkan berbagai metode cerdas seperti <i>Fuzzy Logic</i>, <i>Neural Network</i>, dan
+                    <i>Evolutionary Algorithms</i>.
+                </li>
+            </ul>
+
+
+            <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.3);">
+
+            <h2>2. Penjelasan Logika Fuzzy</h2>
+            <p>
+                <b>Logika Fuzzy</b> merupakan cabang dari Soft Computing yang memperkenalkan konsep
+                nilai kebenaran yang tidak hanya “benar” atau “salah”, tetapi bisa berada di antara keduanya.
+                Contohnya, suhu ruangan tidak hanya dikatakan “dingin” atau “panas”,
+                tetapi juga bisa “agak dingin”, “hangat”, atau “cukup panas”.
+            </p>
+            <p>
+                Dengan pendekatan ini, sistem dapat meniru cara manusia berpikir dan mengambil keputusan
+                dalam kondisi yang ambigu. Logika Fuzzy digunakan pada berbagai bidang,
+                seperti pengendalian suhu otomatis, sistem pakar, hingga pengenalan pola.
+            </p>
+
+            <h3>🧩 Komponen utama Logika Fuzzy:</h3>
+            <ul>
+                <li><b>Fuzzification</b> – mengubah input numerik menjadi nilai fuzzy (misalnya dari angka suhu menjadi
+                    “dingin”).</li>
+                <li><b>Inference Engine</b> – menerapkan aturan logika berbasis “jika-maka” (<i>IF-THEN Rules</i>).</li>
+                <li><b>Defuzzification</b> – mengubah hasil fuzzy menjadi output numerik kembali.</li>
+            </ul>
+
+            <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.3);">
+
+            <h2>3. Penjelasan Neural Network</h2>
+            <p>
+                <b>Jaringan Syaraf Tiruan (Neural Network)</b> adalah model komputasi yang terinspirasi
+                dari cara kerja otak manusia dalam mengenali pola dan memproses informasi.
+                Neural Network terdiri dari lapisan neuron buatan (node) yang saling terhubung.
+                Setiap neuron menerima input, memprosesnya menggunakan fungsi aktivasi, dan menghasilkan output.
+            </p>
+
+            <p>
+                Model ini mampu belajar dari data, mengenali pola, dan melakukan generalisasi terhadap data baru.
+                Oleh karena itu, Neural Network banyak digunakan dalam pengenalan wajah, klasifikasi gambar,
+                deteksi suara, dan prediksi data.
+            </p>
+
+            <h3>🧠 Struktur dasar Neural Network:</h3>
+            <ul>
+                <li><b>Input Layer</b> – menerima data masukan.</li>
+                <li><b>Hidden Layer(s)</b> – memproses dan mengekstraksi pola dari data.</li>
+                <li><b>Output Layer</b> – menghasilkan hasil akhir (seperti kategori atau nilai prediksi).</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
